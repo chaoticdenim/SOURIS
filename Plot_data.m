@@ -12,5 +12,11 @@ higherBound=4500;
 %get baseline
 baseline=y(ilx:ihx);
 F0=mean(baseline);
+data_norm=(y-F0)/F0;
+threshold=3*std(data_norm);
+
 %plot F as a function of time
-plot(t/1000,(y-F0)/F0)
+plot(t/1000, data_norm)
+hold on
+plot(t/1000,ones(size(t)) * threshold)
+hold off
