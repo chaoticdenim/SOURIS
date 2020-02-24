@@ -14,7 +14,7 @@ function C = SourisXLS(filename)
 [NUM,TXT,~]= xlsread(filename);
 [NoOfRows,NoOfColumn]= size(NUM);
 
-for i = 1:NoOfColumn
+for i = 2:NoOfColumn
     TXT{1,i}=TXT{1,i}(1:3); %Keep the label of each cell recording
 end
 C={TXT;NUM};
