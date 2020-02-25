@@ -1,5 +1,5 @@
-was_cell_activated(2)
-make_plot_for(2, 0)
+was_cell_activated(2, 'Data_for_test.xlsx')
+make_plot_for(2, 0, 'Data_for_test.xlsx')
 
 function res = make_plot_for(col, withThreshold, file)
     [time, data] = load_and_process(col, file);
@@ -33,8 +33,8 @@ function [time, data] = load_and_process(col, file)
     data=data_norm;
 end
 
-function res = was_cell_activated(col)
-    [~, data] = load_and_process(col);
+function res = was_cell_activated(col, file)
+    [~, data] = load_and_process(col, file);
     threshold=3*std(data);
     bools=data >= threshold;
     if any(bools)
