@@ -1,8 +1,8 @@
 was_cell_activated(2)
 make_plot_for(2, 0)
 
-function res = make_plot_for(col, withThreshold)
-    [time, data] = load_and_process(col);
+function res = make_plot_for(col, withThreshold, file)
+    [time, data] = load_and_process(col, file);
     %plot F as a function of time
     plot(time, data)
     hold on
@@ -13,8 +13,8 @@ function res = make_plot_for(col, withThreshold)
     hold off
 end
 
-function [time, data] = load_and_process(col)
-    [v,T,vT]=xlsread('Data_for_test.xlsx');
+function [time, data] = load_and_process(col, file)
+    [v,T,vT]=xlsread(file);
     %v: Double
     %T and vT : cell
     %use v containing numbers
