@@ -13,4 +13,22 @@ for i = 2:NoOfColumn
         end
     end
 end
-C={TXT;NUM};
+LABEL=cell2mat(TXT(:,2:end));
+LABELF=zeros(1,NoOfColumn-1);
+DATA=NUM(:,2:end);
+DATAF=zeros(NoOfRows,NoOfColumn-1);
+if LABEL(1,1)>LABEL(1,uint8(NoOfColumn/2))
+        k=1;
+        for i = 1:NoOfColumn-1
+            LABELF(:,i)=LABEL(:,NoOfColumn-k);
+            DATAF(:,i)=DATA(:,NoOfColumn-k);
+            k=k+1;
+        end
+end
+LABELT=zeros(1,NoOfColumn);
+LABELT(:,:)=[NaN, LABELF];
+DATAT=zeros(NoOfRows,NoOfColumn);
+DATAT(:,:)=[NUM(:,1),DATAF];
+C=[LABELT;DATAT];
+
+end
