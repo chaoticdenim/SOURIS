@@ -1,5 +1,5 @@
 %% Import data from spreadsheet
-function C = SourisXLS(filename)
+function C = sourisXLS(filename)
 [NUM,TXT,~]= xlsread(filename);
 [NoOfRows,NoOfColumn]= size(NUM);
 

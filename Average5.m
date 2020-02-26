@@ -1,69 +1,34 @@
 %% This function receives 5 cell elements originated via "SourisXLS" and generates a single cell element wich contains the avarage of the 5 initial inputs
-run_plots_for(600, 2)
-
-function DATAF = make_avgs (C1,C2,C3,C4,C5,x)
-DATA(:,:,1)=C1;
-DATA(:,:,2)=C2;
-DATA(:,:,3)=C3;
-DATA(:,:,4)=C4;
-DATA(:,:,5)=C5;
-[NoOfRows,NoOfColumn]=size(C1);
-DATAF=zeros([NoOfRows,NoOfColumn]);
-time=DATA(:,1);
-lowerBound=3000;
-higherBound=4500;
-[ ~, ilx ] = min(abs(time-lowerBound));
-[ ~, ihx ] = min(abs(time-higherBound));
-for j = 1:5
-        for i = 2:NoOfColumn
-            %get baseline
-            baseline=DATA(ilx:ihx,i,j);
-            F0=mean(baseline);
-            DATA(:,i,j)=(DATA(:,i,j)-F0)/F0;
-            DATAF(:,i)=DATAF(:,i)+DATA(:,i,j);
-        end
-end
- DATAF(:,2:end)=DATAF(:,2:end)./5;
- 
- 
- data=DATAF(:,x);
-
-    %get baseline
-    %baseline=data(ilx:ihx);
-    %F0=mean(baseline);
-    %data_norm=(data-F0)/F0;
-    time=time/1000;
-    %data=data_norm;
-    %plot F as a function of time
-    figure,
-    plot(time, data)
-    hold on
-    threshold=3*std(data);
-    plot(time,ones(size(time)) * threshold)
-    hold off
-    figure,
-    hold on
-    plot(time,DATA(:,x,1));
-    plot(time,DATA(:,x,2));
-    plot(time,DATA(:,x,3));
-    plot(time,DATA(:,x,4));
-    plot(time,DATA(:,x,5));
-    hold off,
-    figure,
-    plot(time, DATA(:,x,1), 'Color', [0.701, 0.917, 0.705])
-    hold on
-    plot(time, data, 'Color', [0.090, 0.431, 0.090])
-    hold off
-
-end
-
-function DATAF = run_plots_for(voltage, roi)
+function [time, avg, DATA] = average5 (voltage, roi)
     if voltage == 300 || voltage == 400 || voltage == 500 || voltage == 600
-        C1=SourisXLS(voltage + "/Data_" + voltage + "mV_starts_250us_1");
-        C2=SourisXLS(voltage + "/Data_" + voltage + "mV_starts_250us_2");
-        C3=SourisXLS(voltage + "/Data_" + voltage + "mV_starts_250us_3");
-        C4=SourisXLS(voltage + "/Data_" + voltage + "mV_starts_250us_4");
-        C5=SourisXLS(voltage + "/Data_" + voltage + "mV_starts_250us_5");
-        make_avgs(C1, C2, C3, C4, C5, roi)
+       C1=sourisXLS(voltage + "/Data_" + voltage + "mV_starts_250us_1");
+       C2=sourisXLS(voltage + "/Data_" + voltage + "mV_starts_250us_2");
+       C3=sourisXLS(voltage + "/Data_" + voltage + "mV_starts_250us_3");
+       C4=sourisXLS(voltage + "/Data_" + voltage + "mV_starts_250us_4");
+       C5=sourisXLS(voltage + "/Data_" + voltage + "mV_starts_250us_5");
     end
+    DATA(:,:,1)=C1;
+    DATA(:,:,2)=C2;
+    DATA(:,:,3)=C3;
+    DATA(:,:,4)=C4;
+    DATA(:,:,5)=C5;
+    [NoOfRows,NoOfColumn]=size(C1);
+    DATAF=zeros([NoOfRows,NoOfColumn]);
+    time=DATA(:,1);
+    lowerBound=3000;
+    higherBound=4500;
+    [ ~, ilx ] = min(abs(time-lowerBound));
+    [ ~, ihx ] = min(abs(time-higherBound));
+    for j = 1:5
+            for i = 2:NoOfColumn
+                %get baseline
+                baseline=DATA(ilx:ihx,i,j);
+                F0=mean(baseline);
+                DATA(:,i,j)=(DATA(:,i,j)-F0)/F0;
+                DATAF(:,i)=DATAF(:,i)+DATA(:,i,j);
+            end
+    end
+    DATAF(:,2:end)=DATAF(:,2:end)./5;
+    avg=DATAF(:,roi);
+    time=time/1000;
 end
