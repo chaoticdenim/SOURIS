@@ -1,8 +1,9 @@
-was_cell_activated(2, 'Data_for_test.xlsx')
-make_plot_for(2, 0, 'Data_for_test.xlsx')
+% Example usage:
+% was_cell_activated(2, 'Data_for_test.xlsx')
+% make_plot_for(2, 0, 'Data_for_test.xlsx')
 
-function res = make_plot_for(col, withThreshold, file)
-    [time, data] = load_and_process(col, file);
+function Plot_data(roi, withThreshold, file)
+    [time, data] = load_and_process(roi, file);
     %plot F as a function of time
     plot(time, data)
     hold on

@@ -1,5 +1,7 @@
 %% This function receives 5 cell elements originated via "SourisXLS" and generates a single cell element wich contains the avarage of the 5 initial inputs
-function DATAF = Average5 (C1,C2,C3,C4,C5,x)
+run_plots_for(600, 2)
+
+function DATAF = make_avgs (C1,C2,C3,C4,C5,x)
 DATA(:,:,1)=C1;
 DATA(:,:,2)=C2;
 DATA(:,:,3)=C3;
@@ -46,17 +48,22 @@ end
     plot(time,DATA(:,x,3));
     plot(time,DATA(:,x,4));
     plot(time,DATA(:,x,5));
+    hold off,
+    figure,
+    plot(time, DATA(:,x,1), 'Color', [0.701, 0.917, 0.705])
+    hold on
+    plot(time, data, 'Color', [0.090, 0.431, 0.090])
     hold off
 
 end
 
-function DATAF = run_plot_for(voltage, cell)
+function DATAF = run_plots_for(voltage, roi)
     if voltage == 300 || voltage == 400 || voltage == 500 || voltage == 600
         C1=SourisXLS(voltage + "/Data_" + voltage + "mV_starts_250us_1");
         C2=SourisXLS(voltage + "/Data_" + voltage + "mV_starts_250us_2");
         C3=SourisXLS(voltage + "/Data_" + voltage + "mV_starts_250us_3");
         C4=SourisXLS(voltage + "/Data_" + voltage + "mV_starts_250us_4");
         C5=SourisXLS(voltage + "/Data_" + voltage + "mV_starts_250us_5");
-        Average5(C1, C2, C3, C4, C5, cell)
+        make_avgs(C1, C2, C3, C4, C5, roi)
     end
 end
