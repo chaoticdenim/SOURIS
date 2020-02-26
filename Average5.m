@@ -16,11 +16,11 @@ higherBound=4500;
 [ ~, ihx ] = min(abs(time-higherBound));
 for j = 1:5
         for i = 2:NoOfColumn
-            DATAF(:,i)=DATAF(:,i)+DATA(:,i,j);
             %get baseline
             baseline=DATA(ilx:ihx,i,j);
             F0=mean(baseline);
             DATA(:,i,j)=(DATA(:,i,j)-F0)/F0;
+            DATAF(:,i)=DATAF(:,i)+DATA(:,i,j);
         end
 end
  DATAF(:,2:end)=DATAF(:,2:end)./5;
@@ -29,11 +29,11 @@ end
  data=DATAF(:,x);
 
     %get baseline
-    baseline=data(ilx:ihx);
-    F0=mean(baseline);
-    data_norm=(data-F0)/F0;
+    %baseline=data(ilx:ihx);
+    %F0=mean(baseline);
+    %data_norm=(data-F0)/F0;
     time=time/1000;
-    data=data_norm;
+    %data=data_norm;
     %plot F as a function of time
     figure,
     plot(time, data)
