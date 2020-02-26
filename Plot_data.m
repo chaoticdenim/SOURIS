@@ -34,9 +34,13 @@ function [time, data] = load_and_process(col, file)
     data=data_norm;
 end
 
-function res = was_cell_activated(col, file)
-    [~, data] = load_and_process(col, file);
+function res = was_cell_activated(cell, file)
+    [t, data] = load_and_process(cell, file);
+    %Only look between 5 and 5.5 seconds
     threshold=3*std(data);
+    [ ~, ilx ] = min(abs(t-5));
+    [ ~, ihx ] = min(abs(t-5.5));
+    data=data(ilx:ihx)
     bools=data >= threshold;
     if any(bools)
         res=1;
