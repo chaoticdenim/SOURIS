@@ -1,5 +1,5 @@
 %% This function receives 5 cell elements originated via "SourisXLS" and generates a single cell element wich contains the avarage of the 5 initial inputs
-function [time, avg, DATA] = Average5 (voltage, roi)
+function [time, DATA, DATAF] = Average5 (voltage)
     if voltage == 300 || voltage == 400 || voltage == 500 || voltage == 600
        C1=sourisXLS(voltage + "/Data_1");
        C2=sourisXLS(voltage + "/Data_2");
@@ -29,6 +29,5 @@ function [time, avg, DATA] = Average5 (voltage, roi)
             end
     end
     DATAF(:,2:end)=DATAF(:,2:end)./5;
-    avg=DATAF(:,roi);
     time=time/1000;
 end

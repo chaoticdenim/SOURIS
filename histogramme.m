@@ -3,12 +3,9 @@ function histogramme
     NoActiveCell = {0, 0, 0, 0};
     for i = 1:length(voltages)
         voltage = voltages{i};
-        [~, DATA, ~] = average5(voltage);
-        DATA(:,229)
-        for j = 1:229
-            voltage
-            j
-            res = check_activ(DATA, j);
+        [time,~, DATAF] = Average5(voltage);
+        for roi = 1:229
+            res = check_activ(DATAF, time, roi);
             if res == 1
                 NoActiveCell{i} = NoActiveCell{i} + 1;
             end
