@@ -1,11 +1,11 @@
 %% This function receives 5 cell elements originated via "SourisXLS" and generates a single cell element wich contains the avarage of the 5 initial inputs
-function [time, avg, DATA] = average5 (voltage, roi)
+function [time, avg, DATA] = Average5 (voltage, roi)
     if voltage == 300 || voltage == 400 || voltage == 500 || voltage == 600
-       C1=sourisXLS(voltage + "/Data_" + voltage + "mV_starts_250us_1");
-       C2=sourisXLS(voltage + "/Data_" + voltage + "mV_starts_250us_2");
-       C3=sourisXLS(voltage + "/Data_" + voltage + "mV_starts_250us_3");
-       C4=sourisXLS(voltage + "/Data_" + voltage + "mV_starts_250us_4");
-       C5=sourisXLS(voltage + "/Data_" + voltage + "mV_starts_250us_5");
+       C1=sourisXLS(voltage + "/Data_1");
+       C2=sourisXLS(voltage + "/Data_2");
+       C3=sourisXLS(voltage + "/Data_3");
+       C4=sourisXLS(voltage + "/Data_4");
+       C5=sourisXLS(voltage + "/Data_5");
     end
     DATA(:,:,1)=C1;
     DATA(:,:,2)=C2;

@@ -1,5 +1,5 @@
 function [res, bools] = check_activ(voltage, roi)
-    [time, avg, ~] = average5(voltage, roi);
+    [time, avg, ~] = Average5(voltage, roi);
     %Only look between 5 and 5.5 seconds
     threshold=3*std(avg);
     [ ~, ilx ] = min(abs(time-5));

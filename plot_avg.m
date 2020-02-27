@@ -1,5 +1,5 @@
 function plot_avg(voltage, roi)
-        [time, data, DATA] = average5(voltage, roi);
+        [time, data, DATA] = Average5(voltage, roi);
         figure,
         plot(time, data)
         hold on
